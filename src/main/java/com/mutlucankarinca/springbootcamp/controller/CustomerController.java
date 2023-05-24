@@ -1,7 +1,8 @@
 package com.mutlucankarinca.springbootcamp.controller;
 
-import com.mutlucankarinca.springbootcamp.entity.Customer;
-import com.mutlucankarinca.springbootcamp.service.entityService.CustomerEntityService;
+import com.mutlucankarinca.springbootcamp.controller.contract.CustomerControllerContract;
+import com.mutlucankarinca.springbootcamp.dto.CustomerDTO;
+import com.mutlucankarinca.springbootcamp.dto.CustomerSaveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,20 +12,20 @@ import java.util.List;
 @RequestMapping("api/v1/customers")
 @RequiredArgsConstructor
 public class CustomerController {
-    private final CustomerEntityService customerEntityService;
+    private final CustomerControllerContract customerControllerContract;
 
     @PostMapping
-    public Customer save(@RequestBody Customer customer){
-    return customerEntityService.save(customer);
+    public CustomerDTO save(@RequestBody CustomerSaveRequest customerSaveRequest){
+    return customerControllerContract.save(customerSaveRequest);
     }
     @GetMapping
-    public List<Customer> findAll(){
-        return customerEntityService.findAll();
+    public List<CustomerDTO> findAll(){
+        return customerControllerContract.findAll();
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
-    customerEntityService.delete(id);
+    customerControllerContract.delete(id);
     }
 
 }
