@@ -4,6 +4,9 @@ import com.mutlucankarinca.springbootcamp.controller.contract.CustomerController
 import com.mutlucankarinca.springbootcamp.dto.CustomerDTO;
 import com.mutlucankarinca.springbootcamp.dto.CustomerSaveRequest;
 import com.mutlucankarinca.springbootcamp.entity.Customer;
+import com.mutlucankarinca.springbootcamp.errorMessages.CustomerErrorMessage;
+import com.mutlucankarinca.springbootcamp.general.BusinessException;
+import com.mutlucankarinca.springbootcamp.general.ItemNotFoundException;
 import com.mutlucankarinca.springbootcamp.mapper.CustomerMapper;
 import com.mutlucankarinca.springbootcamp.service.entityService.CustomerEntityService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +24,8 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
     public CustomerDTO save(CustomerSaveRequest request) {
 
         Customer customer = CustomerMapper.INSTANCE.convertToCustomer(request);
+
+        //throw new BusinessException(CustomerErrorMessage.CUSTOMER_NOT_FOUND );
 
         customer = customerEntityService.save(customer);
 
@@ -35,6 +41,10 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
 
     @Override
     public void delete(Long id) {
+        Optional<Customer> customer=customerEntityService.findById(id);
+        if(customer.isEmpty()){
+            throw new ItemNotFoundException(CustomerErrorMessage.CUSTOMER_NOT_FOUND );
+        }
         customerEntityService.delete(id);
     }
 }
