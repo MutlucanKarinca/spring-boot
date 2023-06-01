@@ -5,12 +5,10 @@ import com.mutlucankarinca.springbootcamp.dto.CustomerDTO;
 import com.mutlucankarinca.springbootcamp.dto.CustomerSaveRequest;
 import com.mutlucankarinca.springbootcamp.entity.Customer;
 import com.mutlucankarinca.springbootcamp.errorMessages.CustomerErrorMessage;
-import com.mutlucankarinca.springbootcamp.general.BusinessException;
 import com.mutlucankarinca.springbootcamp.general.ItemNotFoundException;
 import com.mutlucankarinca.springbootcamp.mapper.CustomerMapper;
 import com.mutlucankarinca.springbootcamp.service.entityService.CustomerEntityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
