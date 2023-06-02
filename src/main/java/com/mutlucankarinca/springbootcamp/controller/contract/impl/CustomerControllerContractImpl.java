@@ -40,9 +40,9 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
     @Override
     public void delete(Long id) {
         Optional<Customer> customer=customerEntityService.findById(id);
-        if(customer.isEmpty()){
-            throw new ItemNotFoundException(CustomerErrorMessage.CUSTOMER_NOT_FOUND );
-        }
+       // if(customer.isEmpty()){
+       //     throw new ItemNotFoundException(CustomerErrorMessage.CUSTOMER_NOT_FOUND );
+      //  }
         customerEntityService.delete(id);
     }
 
