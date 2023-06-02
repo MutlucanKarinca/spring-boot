@@ -13,4 +13,5 @@ public interface CustomerControllerContract {
 
     void delete(Long id);
 
+    CustomerDTO findById(Long id);
 }

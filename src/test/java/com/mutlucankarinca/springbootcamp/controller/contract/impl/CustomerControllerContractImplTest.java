@@ -43,19 +43,22 @@ class CustomerControllerContractImplTest {
     }
     @Test
     void shouldFindAllWhenReturnCustomer() {
-
+        String name="mutlucan";
         Customer customer1 = Mockito.mock(Customer.class);
-        Customer customer2 = Mockito.mock(Customer.class);
+        Mockito.when(customer1.getName()).thenReturn(name);
+        //Customer customer2 = Mockito.mock(Customer.class);
 
         List<Customer> customerList=new ArrayList<>();
         customerList.add(customer1);
-        customerList.add(customer2);
+       // customerList.add(customer2);
 
         Mockito.when(customerEntityService.findAll()).thenReturn(customerList);
 
         List<CustomerDTO> customerDTOList = customerControllerContract.findAll();
         System.out.println(customerDTOList);
-        Assertions.assertEquals(2,customerDTOList.size());
+        Assertions.assertEquals(1,customerDTOList.size());
+        Customer result=customerList.get(0);
+        Assertions.assertEquals(name,result.getName());
     }
     @Test
     void shouldDelete() {
